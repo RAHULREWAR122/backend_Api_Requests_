@@ -10,11 +10,14 @@ const app = express();
 const PORT = 3100 
 
 app.use(express.json());
+
 app.use(cors({
-    origin: "*", 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: (origin, callback) => {
+      callback(null, origin || true);
+    },
     credentials: true
 }));
+  
 
 app.get("/" , (req,res)=>{
      res.send({message : 'welcome to backend part'})
